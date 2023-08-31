@@ -17,6 +17,10 @@
 //Path to a program.
 CMAKE_AR:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/lib.exe
 
+//For backwards compatibility, what version of CMake commands and
+// syntax should this version of CMake try to support.
+CMAKE_BACKWARDS_COMPATIBILITY:STRING=2.4
+
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
@@ -122,7 +126,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=CrappyLearningEngine
+CMAKE_PROJECT_NAME:STATIC=Engine
 
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=C:/Program Files (x86)/Windows Kits/10/bin/10.0.22621.0/x64/rc.exe
@@ -203,6 +207,30 @@ CrappyLearningEngine_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 CrappyLearningEngine_SOURCE_DIR:STATIC=C:/Users/nih1/source/repos/CrappyLearningEngine
+
+//Single output directory for building all executables.
+EXECUTABLE_OUTPUT_PATH:PATH=
+
+//Value Computed by CMake
+Engine_BINARY_DIR:STATIC=C:/Users/nih1/source/repos/CrappyLearningEngine/out/build/x64-debug
+
+//Value Computed by CMake
+Engine_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Engine_SOURCE_DIR:STATIC=C:/Users/nih1/source/repos/CrappyLearningEngine
+
+//Single output directory for building all libraries.
+LIBRARY_OUTPUT_PATH:PATH=
+
+//Value Computed by CMake
+Project_BINARY_DIR:STATIC=C:/Users/nih1/source/repos/CrappyLearningEngine/out/build/x64-debug
+
+//Value Computed by CMake
+Project_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Project_SOURCE_DIR:STATIC=C:/Users/nih1/source/repos/CrappyLearningEngine
 
 
 ########################
@@ -295,7 +323,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //noop for ranlib

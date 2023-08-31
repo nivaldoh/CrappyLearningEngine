@@ -8,7 +8,7 @@
 	"installers" : [],
 	"paths" : 
 	{
-		"build" : "Engine",
-		"source" : "Engine"
+		"build" : "src",
+		"source" : "src"
 	}
 }
