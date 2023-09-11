@@ -1,13 +1,12 @@
 #include "Engine.h"
-#include <iostream>
 
-using namespace std;
-
+// TODO: setup basic cross-platform support
 int main()
 {
-	cout << "Hello CMake." << endl;
-
-	Engine engine = Engine();
+	Engine EngineInst = Engine();
+	EngineInst.PreInit();
+	EngineInst.Init();
+	EngineInst.Tick();
 
 	return 0;
 }
