@@ -1,12 +1,6 @@
-﻿// Engine.cpp : Defines the entry point for the application.
-//
+﻿#include "Engine.h"
+#include <vulkan/vulkan.h>
 
-#include "Engine.h"
-
-using namespace std;
-
-int main()
+Engine::Engine()
 {
-	cout << "Hello CMake." << endl;
-	return 0;
 }

@@ -10,3 +10,6 @@ target_include_directories(EngineLib PUBLIC
 
 add_executable(EngineLauncher Launch.cpp)
 target_link_libraries(EngineLauncher PRIVATE EngineLib)
+
+find_package(Vulkan REQUIRED)
+target_link_libraries(EngineLib PRIVATE Vulkan::Vulkan)
