@@ -1,0 +1,11 @@
+{
+	"name": "crappy-learning-engine",
+	"version-string": "0.1.0",
+	"dependencies": [
+		{
+			"name": "glfw3",
+			"features": [],
+			"platform": "windows"
+		}
+	]
+}

@@ -4,12 +4,15 @@
 This project is not intended to be a full-fledged game engine, but rather a playground for me to learn about game engine architecture, graphics programming and a plethora of other things.
 I'll keep things simple at first using libraries when applicable, but I intend to eventually replace them with my own implementations.
 
+## Setup
+- Run setup-environment.ps1 (if on Windows)
+
 ## Roadmap
 
 ### Phase 1: Environment Setup
   - [X] Setup Visual Studio 2022
   - [X] Dependency Management with CMake and vcpkg
-  - [] Integrate GLFW and Vulkan SDK
+  - [X] Integrate GLFW and Vulkan SDK
 
 ### Phase 2: Basic Rendering
   - [] Initialize Vulkan Context

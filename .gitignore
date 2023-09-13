@@ -34,3 +34,4 @@
 # Local directories
 .vs/
 out/
+vcpkg_installed/
