@@ -10,5 +10,6 @@ Push-Location -Path ".\vcpkg"
 .\bootstrap-vcpkg.bat
 
 # Install dependencies
+# TODO: customize this to enable other options depending on the build configuration
 .\vcpkg install --triplet x64-windows
 Pop-Location
