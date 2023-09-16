@@ -1,6 +1,5 @@
-// #include "PlatformLayer.h"
 #include "GLFWWrapper.h"
-//#include <GLFW/glfw3.h>
+// TODO: get rid of error handling here?
 #include <stdexcept>
 #include <iostream>
 
@@ -22,6 +21,7 @@ bool GLFWPlatformLayer::Initialize() {
     }
 
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     window = glfwCreateWindow(640, 480, "Placeholder", NULL, NULL);
     if (!window) {
         std::cerr << "Failed to create GLFW window." << std::endl;

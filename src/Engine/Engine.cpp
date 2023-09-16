@@ -2,9 +2,6 @@
 // TODO: this should depend on build config
 #include "GLFWWrapper.h"
 
-// TODO: create rendering component and probably move this there
-#include <vulkan/vulkan.h>
-
 // TODO: move this out of here
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
