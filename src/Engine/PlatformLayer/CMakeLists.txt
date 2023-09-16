@@ -4,4 +4,4 @@ add_library(PlatformLayer STATIC
 
 target_include_directories(PlatformLayer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(PlatformLayer PRIVATE glfw)
+target_link_libraries(PlatformLayer PUBLIC glfw)

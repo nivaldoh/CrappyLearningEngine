@@ -21,10 +21,6 @@ target_link_libraries(EngineMain PRIVATE GraphicsAPI)
 add_subdirectory(PlatformLayer)
 add_subdirectory(GraphicsAPI)
 
-#target_link_libraries(EngineMain PRIVATE Vulkan::Vulkan)
-# TODO: enable static vs dynamic linking in the build system
-#set(GLFW_VULKAN_STATIC ON)
-
 target_link_libraries(EngineMain PRIVATE glfw)
 
 target_link_libraries(EngineMain PRIVATE glm::glm)

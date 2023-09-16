@@ -3,6 +3,7 @@
 // TODO: flexibilize these
 #include <cstdint>
 #include <vector>
+#include <GLFWWrapper.h>
 
 class Texture;
 class Shader;
