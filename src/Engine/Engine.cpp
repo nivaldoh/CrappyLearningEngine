@@ -1,6 +1,15 @@
 ﻿#include "Engine.h"
+// TODO: this should depend on build config
+#include "GLFWWrapper.h"
+
 // TODO: create rendering component and probably move this there
 #include <vulkan/vulkan.h>
+
+// TODO: move this out of here
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 
 // TODO: get rid of this
 #include <iostream>
@@ -22,4 +31,10 @@ void Engine::Init() {
 // TODO: render simple triangle
 void Engine::Tick() {
 	std::cout << "Running loop" << std::endl;
+
+    // TODO: move this to PreInit
+    GLFWPlatformLayer& GLFWInst = GLFWPlatformLayer::GetInstance();
+    GLFWInst.Initialize();
+    GLFWInst.SetWindowTitle("VulkanTest");
+    GLFWInst.PollEvents();
 }
