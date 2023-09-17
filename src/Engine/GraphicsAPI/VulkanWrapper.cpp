@@ -3,6 +3,11 @@
 //TODO: get rid of this
 #include <iostream>
 
+VulkanWrapper& VulkanWrapper::GetInstance() {
+    static VulkanWrapper instance;
+    return instance;
+}
+
 VulkanWrapper::VulkanWrapper() {
     Initialize();
 }
@@ -29,10 +34,10 @@ bool VulkanWrapper::Initialize() {
 // TODO: make this private?
 void VulkanWrapper::Terminate() {
     if (enableValidationLayers) {
-        DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
+        DestroyDebugUtilsMessengerEXT(vkInstance, debugMessenger, nullptr);
     }
 
-    vkDestroyInstance(instance, nullptr);
+    vkDestroyInstance(vkInstance, nullptr);
 }
 
 void VulkanWrapper::BeginFrame() {
@@ -140,13 +145,13 @@ bool VulkanWrapper::CreateInstance() {
         createInfo.pNext = nullptr;
     }
 
-    VkResult result = vkCreateInstance(&createInfo, nullptr, &instance);
+    VkResult result = vkCreateInstance(&createInfo, nullptr, &vkInstance);
     return result == VK_SUCCESS;
 }
 
 bool VulkanWrapper::SelectPhysicalDevice() {
     uint32_t deviceCount = 0;
-    vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+    vkEnumeratePhysicalDevices(vkInstance, &deviceCount, nullptr);
 
     if (deviceCount == 0) {
         std::cerr << "No Vulkan-compatible physical devices found.\n";
@@ -154,7 +159,7 @@ bool VulkanWrapper::SelectPhysicalDevice() {
     }
 
     std::vector<VkPhysicalDevice> devices(deviceCount);
-    vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
+    vkEnumeratePhysicalDevices(vkInstance, &deviceCount, devices.data());
 
     physicalDevice = devices[0];
     return true;
@@ -206,30 +211,30 @@ void VulkanWrapper::SetupDebugMessenger() {
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
     PopulateDebugMessengerCreateInfo(createInfo);
 
-    if (CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
+    if (CreateDebugUtilsMessengerEXT(vkInstance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
         throw std::runtime_error("failed to set up debug messenger!");
     }
 }
 
 VkResult VulkanWrapper::CreateDebugUtilsMessengerEXT(
-    VkInstance instance,
+    VkInstance vkInstance,
     const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
     const VkAllocationCallbacks* pAllocator,
     VkDebugUtilsMessengerEXT* pDebugMessenger
 ) {
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(vkInstance, "vkCreateDebugUtilsMessengerEXT");
     if (func != nullptr) {
-        return func(instance, pCreateInfo, pAllocator, pDebugMessenger);
+        return func(vkInstance, pCreateInfo, pAllocator, pDebugMessenger);
     }
     else {
         return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 }
 
-void VulkanWrapper::DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator) {
-    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+void VulkanWrapper::DestroyDebugUtilsMessengerEXT(VkInstance vkInstance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* pAllocator) {
+    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(vkInstance, "vkDestroyDebugUtilsMessengerEXT");
     if (func != nullptr) {
-        func(instance, debugMessenger, pAllocator);
+        func(vkInstance, debugMessenger, pAllocator);
     }
 }
 

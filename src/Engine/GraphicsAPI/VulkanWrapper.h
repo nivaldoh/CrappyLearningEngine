@@ -15,6 +15,8 @@ const bool enableValidationLayers = true;
 
 class VulkanWrapper : public IGraphicsAPI {
 public:
+    static VulkanWrapper& GetInstance();
+
     VulkanWrapper();
     ~VulkanWrapper();
 
@@ -50,7 +52,10 @@ public:
         void* pUserData);
 
 private:
-    VkInstance instance;
+    VulkanWrapper(VulkanWrapper const&) = delete;
+    void operator=(VulkanWrapper const&) = delete;
+
+    VkInstance vkInstance;
     VkDevice device;
     VkPhysicalDevice physicalDevice;
     VkQueue graphicsQueue;
