@@ -5,16 +5,16 @@
 
 // TODO: is a singleton the best way to do this?
 
-GLFWPlatformLayer::~GLFWPlatformLayer() {
+GLFWWrapper::~GLFWWrapper() {
     Shutdown();
 }
 
-GLFWPlatformLayer& GLFWPlatformLayer::GetInstance() {
-    static GLFWPlatformLayer instance;
+GLFWWrapper& GLFWWrapper::GetInstance() {
+    static GLFWWrapper instance;
     return instance;
 }
 
-bool GLFWPlatformLayer::Initialize() {
+bool GLFWWrapper::Initialize() {
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW." << std::endl;
         return false;
@@ -32,7 +32,7 @@ bool GLFWPlatformLayer::Initialize() {
     return true;
 }
 
-void GLFWPlatformLayer::Shutdown() {
+void GLFWWrapper::Shutdown() {
     if (window) {
         glfwDestroyWindow(window);
         window = nullptr;
@@ -41,13 +41,25 @@ void GLFWPlatformLayer::Shutdown() {
     glfwTerminate();
 }
 
-void GLFWPlatformLayer::SetWindowTitle(const std::string& title) {
+VkResult GLFWWrapper::CreateWindowSurface(
+    VkInstance 	instance,
+    const VkAllocationCallbacks* allocator,
+    VkSurfaceKHR* surface) {
+    VkResult res = glfwCreateWindowSurface(instance, window, nullptr, surface);
+    if (res != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create window surface");
+    }
+
+    return res;
+}
+
+void GLFWWrapper::SetWindowTitle(const std::string& title) {
     if (window) {
         glfwSetWindowTitle(window, title.c_str());
     }
 }
 
-void GLFWPlatformLayer::SetWindowState(WindowState state) {
+void GLFWWrapper::SetWindowState(WindowState state) {
     if (window) {
         switch (state) {
         case WindowState::MINIMIZED:
@@ -66,7 +78,7 @@ void GLFWPlatformLayer::SetWindowState(WindowState state) {
     }
 }
 
-void GLFWPlatformLayer::PollEvents() {
+void GLFWWrapper::PollEvents() {
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
     }

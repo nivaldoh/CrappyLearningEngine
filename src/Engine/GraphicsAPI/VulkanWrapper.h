@@ -4,6 +4,7 @@
 #include <vulkan/vulkan.h>
 // TODO: move this
 #include <optional>
+#include <set>
 
 const std::vector<const char*> validationLayers = {
     "VK_LAYER_KHRONOS_validation"
@@ -17,15 +18,18 @@ const bool enableValidationLayers = true;
 
 struct QueueFamilyIndices {
     std::optional<uint32_t> graphicsFamily;
+    std::optional<uint32_t> presentFamily;
 
     bool isComplete() {
-        return graphicsFamily.has_value();
+        return graphicsFamily.has_value() && presentFamily.has_value();
     }
 };
 
 class VulkanWrapper : public IGraphicsAPI {
 public:
     static VulkanWrapper& GetInstance();
+    // TODO: do this in a better way
+    void SetGLFWInstance(GLFWWrapper* instance);
 
     VulkanWrapper();
     ~VulkanWrapper();
@@ -65,6 +69,9 @@ private:
     VulkanWrapper(VulkanWrapper const&) = delete;
     void operator=(VulkanWrapper const&) = delete;
 
+    // TODO: decouple this
+    GLFWWrapper* glfwInstance;
+
     VkInstance vkInstance;
     VkDevice device;
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
@@ -81,6 +88,7 @@ private:
     bool CreateInstance();
     bool CheckValidationLayerSupport();
     std::vector<const char*> GetRequiredExtensions();
+    void CreateSurface();
     bool PickPhysicalDevice();
     bool IsDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device);

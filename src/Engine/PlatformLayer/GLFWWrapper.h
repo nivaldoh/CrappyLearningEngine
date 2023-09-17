@@ -1,14 +1,22 @@
 #pragma once
 
 #include "PlatformLayer.h"
+#include <vulkan/vulkan.h>
 #include <GLFW/glfw3.h>
 
-class GLFWPlatformLayer : public IPlatformLayer {
+class GLFWWrapper : public IPlatformLayer {
 public:
-    static GLFWPlatformLayer& GetInstance();
+    static GLFWWrapper& GetInstance();
 
     virtual bool Initialize() override;
     virtual void Shutdown() override;
+
+    // Vulkan
+    // TODO: create macro and maybe set this in the interface
+    VkResult CreateWindowSurface(
+        VkInstance 	instance,
+        const VkAllocationCallbacks* allocator,
+        VkSurfaceKHR* surface);
 
     virtual void SetWindowTitle(const std::string& title) override;
     virtual void SetWindowState(WindowState state) override;
@@ -17,10 +25,10 @@ public:
     //virtual void RegisterEventListener(std::shared_ptr<Event> listener) override;
 
 private:
-    GLFWPlatformLayer() = default;
-    virtual ~GLFWPlatformLayer() override;
-    GLFWPlatformLayer(GLFWPlatformLayer const&) = delete;
-    void operator=(GLFWPlatformLayer const&) = delete;
+    GLFWWrapper() = default;
+    virtual ~GLFWWrapper() override;
+    GLFWWrapper(GLFWWrapper const&) = delete;
+    void operator=(GLFWWrapper const&) = delete;
 
     // std::shared_ptr<Event> eventListener;
     

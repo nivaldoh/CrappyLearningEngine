@@ -31,7 +31,7 @@ void Engine::Tick() {
 	std::cout << "Running loop" << std::endl;
 
     // TODO: move this to PreInit
-    GLFWPlatformLayer& GLFWInst = GLFWPlatformLayer::GetInstance();
+    GLFWWrapper& GLFWInst = GLFWWrapper::GetInstance();
     GLFWInst.Initialize();
     GLFWInst.SetWindowTitle("VulkanTest");
 
