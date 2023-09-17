@@ -7,5 +7,5 @@ target_include_directories(GraphicsAPI PRIVATE
     ../PlatformLayer
 )
 
-target_link_libraries(GraphicsAPI PRIVATE Vulkan::Vulkan)
+target_link_libraries(GraphicsAPI PUBLIC Vulkan::Vulkan)
 target_link_libraries(GraphicsAPI PRIVATE PlatformLayer)

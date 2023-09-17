@@ -1,6 +1,7 @@
 ﻿#include "Engine.h"
 // TODO: this should depend on build config
 #include "GLFWWrapper.h"
+#include "VulkanWrapper.h"
 
 // TODO: move this out of here
 #define GLM_FORCE_RADIANS
@@ -33,5 +34,10 @@ void Engine::Tick() {
     GLFWPlatformLayer& GLFWInst = GLFWPlatformLayer::GetInstance();
     GLFWInst.Initialize();
     GLFWInst.SetWindowTitle("VulkanTest");
+
+    VulkanWrapper VulkanInst = VulkanWrapper();
+    //VulkanInst.Initialize();
+
+    std::cout << "Polling" << std::endl;
     GLFWInst.PollEvents();
 }

@@ -17,7 +17,8 @@ I'll keep things simple at first using libraries when applicable, but I intend t
 
 ### Phase 2: Basic Rendering
   - [X] Create Blank Window
-  - [] Initialize Vulkan Context
+  - [X] Initialize Vulkan Context
+    - [X] Setup Vulkan Validation Layer
   - [] Basic Render Loop
   - [] Draw a Triangle
 
