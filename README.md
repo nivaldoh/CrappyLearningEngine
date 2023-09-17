@@ -17,9 +17,11 @@ I'll keep things simple at first using libraries when applicable, but I intend t
 
 ### Phase 2: Basic Rendering
   - [X] Create Blank Window
-  - [X] Initialize Vulkan Context
+  - [X] Setup Vulkan
+    - [X] Create Instance
     - [X] Setup Validation Layer
-    - [X] Select Physical Device
+    - [X] Select Physical Device and Queue Family
+    - [X] Create Logical Device
   - [] Basic Render Loop
   - [] Draw a Triangle
 

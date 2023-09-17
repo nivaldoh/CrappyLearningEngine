@@ -84,6 +84,7 @@ private:
     bool PickPhysicalDevice();
     bool IsDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device);
+    void CreateLogicalDevice();
 
     void SetupDebugMessenger();
     VkResult CreateDebugUtilsMessengerEXT(
