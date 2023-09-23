@@ -35,3 +35,6 @@
 .vs/
 out/
 vcpkg_installed/
+
+# Compiled SPIR-V shaders
+*.spv
