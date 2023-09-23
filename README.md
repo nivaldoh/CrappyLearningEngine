@@ -24,6 +24,8 @@ I'll keep things simple at first using libraries when applicable, but I intend t
     - [X] Create Logical Device
     - [X] Create Swap Chain
     - [X] Create Image Views
+    - [X] Create Shader Modules
+    - [ ] Create Graphics Pipeline
   - [] Basic Render Loop
   - [] Draw a Triangle
 
@@ -31,6 +33,7 @@ I'll keep things simple at first using libraries when applicable, but I intend t
   - [] Basic Unit Testing
   - [] Simple Logging Mechanism
   - [] Basic Performance Profiling?
+  - [] Static Analysis
 
 ### Phase 4: Resource Management
   - [] Basic File I/O for Resources

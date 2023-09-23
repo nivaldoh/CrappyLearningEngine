@@ -39,6 +39,7 @@ bool VulkanWrapper::Initialize() {
     CreateLogicalDevice();
     CreateSwapChain();
     CreateImageViews();
+    CreateGraphicsPipeline();
 
     return true;
 }
@@ -377,6 +378,67 @@ void VulkanWrapper::CreateImageViews() {
             throw std::runtime_error("failed to create image views!");
         }
     }
+}
+
+// TODO: organize helper functions
+std::string UtilGetRelativePath(const std::string& targetFile, int levels) {
+    std::filesystem::path exePath = std::filesystem::current_path();
+
+    for (int i = 0; i < levels; ++i) {
+        if (exePath.has_parent_path()) {
+            exePath = exePath.parent_path();
+        }
+        else {
+            throw std::runtime_error("Reached the root directory, can't go up further.");
+        }
+    }
+
+    exePath /= targetFile;
+
+    std::cout << "\n\nRelative path: " << exePath.string() << std::endl;
+
+    return exePath.string();
+}
+
+// TODO: organize helper functions
+VkShaderModule VulkanWrapper::CreateShaderModule(const std::vector<char>& code) {
+    VkShaderModuleCreateInfo createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+    createInfo.codeSize = code.size();
+    createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+
+    VkShaderModule shaderModule;
+    if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+        throw std::runtime_error("failed to create shader module!");
+    }
+
+    return shaderModule;
+}
+
+void VulkanWrapper::CreateGraphicsPipeline() {
+    // TODO: the code runs from the build output directory, and the shaders aren't being compiled there yet
+    auto vertShaderCode = readFile(UtilGetRelativePath("src/Shaders/vert.spv", 5));
+    auto fragShaderCode = readFile(UtilGetRelativePath("src/Shaders/frag.spv", 5));
+
+    VkShaderModule vertShaderModule = CreateShaderModule(vertShaderCode);
+    VkShaderModule fragShaderModule = CreateShaderModule(fragShaderCode);
+
+    VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
+    vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
+    vertShaderStageInfo.module = vertShaderModule;
+    vertShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
+    fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
+    fragShaderStageInfo.module = fragShaderModule;
+    fragShaderStageInfo.pName = "main";
+
+    VkPipelineShaderStageCreateInfo shaderStages[] = { vertShaderStageInfo, fragShaderStageInfo };
+
+    vkDestroyShaderModule(device, fragShaderModule, nullptr);
+    vkDestroyShaderModule(device, vertShaderModule, nullptr);
 }
 
 bool VulkanWrapper::IsDeviceSuitable(VkPhysicalDevice device) {
