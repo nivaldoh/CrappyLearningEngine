@@ -22,6 +22,8 @@ I'll keep things simple at first using libraries when applicable, but I intend t
     - [X] Setup Validation Layer
     - [X] Select Physical Device and Queue Family
     - [X] Create Logical Device
+    - [X] Create Swap Chain
+    - [X] Create Image Views
   - [] Basic Render Loop
   - [] Draw a Triangle
 
@@ -117,6 +119,7 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 - "Real-Time Rendering, Fourth Edition" by Tomas Akenine-Möller et al.
 - [MIT OCW - Computer Graphics](https://ocw.mit.edu/courses/6-837-computer-graphics-fall-2012/)
 - [NVIDIA - Ray Tracing Essentials](https://www.youtube.com/playlist?list=PL5B692fm6--sgm8Uiava0IIvUojjFOCSR)
+- [CppCon 2017: Nicolas Guillemot “Design Patterns for Low-Level Real-Time Rendering”](https://www.youtube.com/watch?v=mdPeXJ0eiGc&ab_channel=CppCon)
 
 ### Linear Algebra
 - "Essential Mathematics for Games and Interactive Applications, Third Edition" by James M. Van Verth et al.

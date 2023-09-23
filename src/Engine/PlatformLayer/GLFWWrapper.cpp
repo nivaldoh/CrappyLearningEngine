@@ -53,6 +53,10 @@ VkResult GLFWWrapper::CreateWindowSurface(
     return res;
 }
 
+void GLFWWrapper::GetFramebufferSize(int* width, int* height) {
+	glfwGetFramebufferSize(window, width, height);
+}
+
 void GLFWWrapper::SetWindowTitle(const std::string& title) {
     if (window) {
         glfwSetWindowTitle(window, title.c_str());

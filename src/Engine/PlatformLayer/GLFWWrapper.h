@@ -17,6 +17,7 @@ public:
         VkInstance 	instance,
         const VkAllocationCallbacks* allocator,
         VkSurfaceKHR* surface);
+    void GetFramebufferSize(int* width, int* height);
 
     virtual void SetWindowTitle(const std::string& title) override;
     virtual void SetWindowState(WindowState state) override;

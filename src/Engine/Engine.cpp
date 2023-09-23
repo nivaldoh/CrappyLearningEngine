@@ -36,6 +36,8 @@ void Engine::Tick() {
     GLFWInst.SetWindowTitle("VulkanTest");
 
     VulkanWrapper& VulkanInst = VulkanWrapper::GetInstance();
+    VulkanInst.SetGLFWInstance(&GLFWInst);
+    VulkanInst.Initialize();
 
     std::cout << "Polling" << std::endl;
     GLFWInst.PollEvents();
