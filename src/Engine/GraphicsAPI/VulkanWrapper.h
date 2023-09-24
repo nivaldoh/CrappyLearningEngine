@@ -122,6 +122,7 @@ private:
     VkPipeline graphicsPipeline;
     std::vector<VkFramebuffer> swapChainFramebuffers;
     VkCommandPool commandPool;
+    VkCommandBuffer commandBuffer;
 
     VkDebugUtilsMessengerEXT debugMessenger;
 
@@ -145,6 +146,8 @@ private:
     VkShaderModule CreateShaderModule(const std::vector<char>& code);
     void CreateFramebuffers();
     void CreateCommandPool();
+    void CreateCommandBuffer();
+    void RecordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 
     void SetupDebugMessenger();
     VkResult CreateDebugUtilsMessengerEXT(
