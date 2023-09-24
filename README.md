@@ -25,7 +25,8 @@ I'll keep things simple at first using libraries when applicable, but I intend t
     - [X] Create Swap Chain
     - [X] Create Image Views
     - [X] Create Shader Modules
-    - [ ] Create Graphics Pipeline
+    - [X] Setup Graphics Pipeline
+    - [ ] Render Passes
   - [] Basic Render Loop
   - [] Draw a Triangle
 
@@ -138,7 +139,10 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 - [Docs](https://www.glfw.org/docs/latest/)
 
 ### Graphics
+- [Direct3D 12 programming guide](https://learn.microsoft.com/en-us/windows/win32/direct3d12/direct3d-12-graphics)
+- [Microsoft DirectX 12 playlist](https://www.youtube.com/watch?v=dcDDvoauaz0&list=PLeHvwXyqearWT_NT7CiGm_kEiKabWNPKw&ab_channel=MicrosoftDirectX12andGraphicsEducation)
 - [Ray tracing in one weekend](https://github.com/RayTracing/raytracing.github.io)
+- [NVIDIA Keynote at SIGGRAPH 2023](https://www.youtube.com/watch?v=Z2VBKerS63A&ab_channel=NVIDIA)
 - [Analyzing Starfield’s Performance on Nvidia’s 4090 and AMD’s 7900 XTX](https://chipsandcheese.com/2023/09/14/analyzing-starfields-performance-on-nvidias-4090-and-amds-7900-xtx/)
 
 #### Vulkan
