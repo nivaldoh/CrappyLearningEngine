@@ -26,7 +26,7 @@ I'll keep things simple at first using libraries when applicable, but I intend t
     - [X] Create Image Views
     - [X] Create Shader Modules
     - [X] Setup Graphics Pipeline
-    - [ ] Render Passes
+    - [ ] Create Render Passes
   - [] Basic Render Loop
   - [] Draw a Triangle
 
@@ -115,7 +115,7 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 - "A Tour of C++ (C++ In-Depth Series), 3rd Edition" by Bjarne Stroustrup: Excellent overview of the C++, updated for C++20. Contains succint "advice" sections that are very convenient for quick reference.
 - "Modern C++ Design: Generic Programming and Design Patterns Applied, 1st Edition" by Andrei Alexandrescu
 
-### Data-oriented design
+### Data-oriented Design
 - [CppCon 2014: Mike Acton "Data-Oriented Design and C++"](https://www.youtube.com/watch?v=rX0ItVEVjHc&ab_channel=CppCon)
 - [CppCon 2018: Stoyan Nikolov “OOP Is Dead, Long Live Data-oriented Design”](https://www.youtube.com/watch?v=yy8jQgmhbAU&ab_channel=CppCon)
 
@@ -129,9 +129,10 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 - "Essential Mathematics for Games and Interactive Applications, Third Edition" by James M. Van Verth et al.
 - [MIT OCW - Gilbert Strang lectures on Linear Algebra](https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D)
 
-## Useful links/references
+## Useful Links/References
 
-### Game Engines/Rendering Engines
+### Reference repositories
+- [OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD)
 - [OGRE Rendering Engine](https://github.com/OGRECave/ogre)
 - [C++ 20 fully lock-free game engine](https://github.com/eduard-permyakov/peredvizhnikov-engine)
 
