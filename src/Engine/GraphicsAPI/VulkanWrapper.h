@@ -91,6 +91,7 @@ public:
 
     // Drawing
     virtual void DrawIndexed(const Buffer* vertexBuffer, const Buffer* indexBuffer, uint32_t indexCount) override;
+    virtual void DrawFrame() override;
 
     // Debug
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(

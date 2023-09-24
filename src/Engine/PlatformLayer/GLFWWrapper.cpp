@@ -83,9 +83,11 @@ void GLFWWrapper::SetWindowState(WindowState state) {
 }
 
 void GLFWWrapper::PollEvents() {
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
-    }
+    glfwPollEvents();
+}
+
+bool GLFWWrapper::ShouldCloseWindow() {
+	return glfwWindowShouldClose(window);
 }
 
 //std::unique_ptr<IPlatformLayer> CreatePlatformLayer() {

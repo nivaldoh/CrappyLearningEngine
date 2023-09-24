@@ -31,7 +31,6 @@ I'll keep things simple at first using libraries when applicable, but I intend t
     - [X] Create Framebuffers
     - [X] Create Command Pool
     - [X] Create Command Buffer
-    - [ ] Start Render Pass
   - [] Basic Render Loop
   - [] Draw a Triangle
 

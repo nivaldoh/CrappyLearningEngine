@@ -26,6 +26,7 @@ public:
     virtual void SetWindowState(WindowState state) = 0;
 
     virtual void PollEvents() = 0;
+    virtual bool ShouldCloseWindow() = 0;
     //virtual void RegisterEventListener(std::shared_ptr<Event> listener) = 0;
 };
 

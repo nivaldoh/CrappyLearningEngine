@@ -23,6 +23,7 @@ public:
     virtual void SetWindowState(WindowState state) override;
 
     virtual void PollEvents() override;
+    virtual bool ShouldCloseWindow() override;
     //virtual void RegisterEventListener(std::shared_ptr<Event> listener) override;
 
 private:

@@ -40,5 +40,8 @@ void Engine::Tick() {
     VulkanInst.Initialize();
 
     std::cout << "Polling" << std::endl;
-    GLFWInst.PollEvents();
+    while (!GLFWInst.ShouldCloseWindow()) {
+		GLFWInst.PollEvents();
+        VulkanInst.DrawFrame();
+	}
 }

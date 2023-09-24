@@ -660,6 +660,10 @@ void VulkanWrapper::RecordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t 
     }
 }
 
+void VulkanWrapper::DrawFrame() {
+
+}
+
 bool VulkanWrapper::IsDeviceSuitable(VkPhysicalDevice device) {
     QueueFamilyIndices indices = FindQueueFamilies(device);
 

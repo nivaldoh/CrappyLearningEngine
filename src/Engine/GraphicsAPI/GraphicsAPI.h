@@ -20,6 +20,7 @@ public:
     // Rendering Loop
     virtual void BeginFrame() = 0;
     virtual void EndFrame() = 0;
+    virtual void DrawFrame() = 0;
 
     // Resource Management
     virtual Texture* CreateTexture(const char* filename) = 0;
