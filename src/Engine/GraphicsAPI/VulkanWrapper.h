@@ -119,6 +119,9 @@ private:
     std::vector<VkImageView> swapChainImageViews;
     VkRenderPass renderPass;
     VkPipelineLayout pipelineLayout;
+    VkPipeline graphicsPipeline;
+    std::vector<VkFramebuffer> swapChainFramebuffers;
+    VkCommandPool commandPool;
 
     VkDebugUtilsMessengerEXT debugMessenger;
 
@@ -140,6 +143,8 @@ private:
     void CreateRenderPass();
     void CreateGraphicsPipeline();
     VkShaderModule CreateShaderModule(const std::vector<char>& code);
+    void CreateFramebuffers();
+    void CreateCommandPool();
 
     void SetupDebugMessenger();
     VkResult CreateDebugUtilsMessengerEXT(

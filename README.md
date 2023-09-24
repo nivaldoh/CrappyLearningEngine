@@ -26,7 +26,11 @@ I'll keep things simple at first using libraries when applicable, but I intend t
     - [X] Create Image Views
     - [X] Create Shader Modules
     - [X] Setup Graphics Pipeline
-    - [ ] Create Render Passes
+    - [X] Create Render Passes
+    - [X] Create Graphics Pipeline
+    - [X] Create Framebuffers
+    - [X] Create Command Pool
+    - [ ] Create Command Buffer
   - [] Basic Render Loop
   - [] Draw a Triangle
 
