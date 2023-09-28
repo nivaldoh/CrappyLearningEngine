@@ -98,6 +98,7 @@ I'll keep things simple at first using libraries when applicable, but I intend t
   - [] Expose Simple API to Scripts
 
 ### Add later
+- DLSS
 - Audio
 - Physics
 
@@ -119,12 +120,24 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 - "A Tour of C++ (C++ In-Depth Series), 3rd Edition" by Bjarne Stroustrup: Excellent overview of the C++, updated for C++20. Contains succint "advice" sections that are very convenient for quick reference.
 - "Modern C++ Design: Generic Programming and Design Patterns Applied, 1st Edition" by Andrei Alexandrescu
 
-### Data-oriented Design
+### Optimization
+
+#### General
+- [MIT OCW 6.172 - Performance Engineering Of Software Systems](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/resources/lecture-1-intro-and-matrix-multiplication/)
+
+#### Data-oriented Design
 - [CppCon 2014: Mike Acton "Data-Oriented Design and C++"](https://www.youtube.com/watch?v=rX0ItVEVjHc&ab_channel=CppCon)
 - [CppCon 2018: Stoyan Nikolov “OOP Is Dead, Long Live Data-oriented Design”](https://www.youtube.com/watch?v=yy8jQgmhbAU&ab_channel=CppCon)
 
+#### Algorithms
+- "Introduction to Algorithms, 3rd Edition" by Thomas H. Cormen et al.
+- [MIT OCW 6.042J - Mathematics For Computer Science](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/pages/syllabus/)
+- [MIT OCW 6.006 - Introduction To Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/)
+- [MIT OCW 6.046J - Design And Analysis Of Algorithms](https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/)
+
 ### Graphics
 - "Real-Time Rendering, Fourth Edition" by Tomas Akenine-Möller et al.
+    -  [Book website with extra resources, including chapters 25 (Collision Detection) and 26 (Real-Time Ray-Tracing)](https://www.realtimerendering.com/)
 - [MIT OCW - Computer Graphics](https://ocw.mit.edu/courses/6-837-computer-graphics-fall-2012/)
 - [NVIDIA - Ray Tracing Essentials](https://www.youtube.com/playlist?list=PL5B692fm6--sgm8Uiava0IIvUojjFOCSR)
 - [CppCon 2017: Nicolas Guillemot “Design Patterns for Low-Level Real-Time Rendering”](https://www.youtube.com/watch?v=mdPeXJ0eiGc&ab_channel=CppCon)
@@ -133,6 +146,16 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 - "Essential Mathematics for Games and Interactive Applications, Third Edition" by James M. Van Verth et al.
 - [MIT OCW - Gilbert Strang lectures on Linear Algebra](https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D)
 
+### Low-level programming
+- [MIT OCW 6.004 - Computation Structures](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/)
+- [MIT OCW 6.823 - Computer System Architecture](https://ocw.mit.edu/courses/6-823-computer-system-architecture-fall-2005/)
+
+### Software Design
+[MIT OCW 6.005 - Software Construction](https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/)
+
+### Multithreading
+- [MIT OCW 6.189 - Multicore Programming Primer](https://ocw.mit.edu/courses/6-189-multicore-programming-primer-january-iap-2007/pages/syllabus/)
+
 ## Useful Links/References
 
 ### Reference repositories
@@ -140,12 +163,20 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 - [OGRE Rendering Engine](https://github.com/OGRECave/ogre)
 - [C++ 20 fully lock-free game engine](https://github.com/eduard-permyakov/peredvizhnikov-engine)
 
+### Game Engine Architecture
+- [The anatomy of a Godot API call](https://sampruden.github.io/posts/godot-is-not-the-new-unity/)
+
 ### GLFW
 - [Docs](https://www.glfw.org/docs/latest/)
 
 ### Graphics
 - [Direct3D 12 programming guide](https://learn.microsoft.com/en-us/windows/win32/direct3d12/direct3d-12-graphics)
 - [Microsoft DirectX 12 playlist](https://www.youtube.com/watch?v=dcDDvoauaz0&list=PLeHvwXyqearWT_NT7CiGm_kEiKabWNPKw&ab_channel=MicrosoftDirectX12andGraphicsEducation)
+- [Oregon State University - Mike Bailey's Vulkan Page](https://web.engr.oregonstate.edu/~mjb/vulkan/)
+    - [Mike Bailey - Where to Find More Information about
+Computer Graphics, Parallel Programming, and Related Topics](https://web.engr.oregonstate.edu/~mjb/vulkan/moreinfo.pdf)
+- [DLSS repository + programming guide](https://github.com/NVIDIA/DLSS/tree/main)
+- [NVIDIA Ada Science - How Ada advances the science of graphics with DLSS 3](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/ada-lovelace-architecture/nvidia-ada-gpu-science.pdf)
 - [Ray tracing in one weekend](https://github.com/RayTracing/raytracing.github.io)
 - [NVIDIA Keynote at SIGGRAPH 2023](https://www.youtube.com/watch?v=Z2VBKerS63A&ab_channel=NVIDIA)
 - [Analyzing Starfield’s Performance on Nvidia’s 4090 and AMD’s 7900 XTX](https://chipsandcheese.com/2023/09/14/analyzing-starfields-performance-on-nvidias-4090-and-amds-7900-xtx/)
@@ -161,3 +192,12 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 
 ### General
 - Trying to abstract away the usage of libraries such as GLFW in order to make it easier to switch to another library in the future (or use custom code), while trying to avoid unnecessary complexity. Using a singleton to manage library state in the wrapper, but not sure yet if that's a good approach.
+
+## Simplified Overview
+
+### Graphics Pipeline
+- Consists of the following stages:
+    - Application (CPU): prepares the data to be rendered. Can offload extra work to the GPU through compute shaders.
+    - Geometry processing (GPU from this point on): performs transformations, projections and other types of geometry handling.
+    - Rasterization: takes a primitive (generally a triangle) and outputs a set of pixels that roughly fill the primitive.
+    - Pixel processing: determines pixel color. Might also do depth testing
