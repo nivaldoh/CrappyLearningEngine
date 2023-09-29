@@ -158,6 +158,9 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 
 ## Useful Links/References
 
+### General
+- [Amit’s Game Programming Information](http://www-cs-students.stanford.edu/~amitp/gameprog.html)
+
 ### Reference repositories
 - [OpenUSD](https://github.com/PixarAnimationStudios/OpenUSD)
 - [OGRE Rendering Engine](https://github.com/OGRECave/ogre)
@@ -165,6 +168,7 @@ Adhering to [UE standard](https://docs.unrealengine.com/5.3/en-US/epic-cplusplus
 
 ### Game Engine Architecture
 - [The anatomy of a Godot API call](https://sampruden.github.io/posts/godot-is-not-the-new-unity/)
+- [MMO Architecture: Source of truth, Dataflows, I/O bottlenecks and how to solve them](https://prdeving.wordpress.com/2023/09/29/mmo-architecture-source-of-truth-dataflows-i-o-bottlenecks-and-how-to-solve-them/)
 
 ### GLFW
 - [Docs](https://www.glfw.org/docs/latest/)
@@ -193,11 +197,22 @@ Computer Graphics, Parallel Programming, and Related Topics](https://web.engr.or
 ### General
 - Trying to abstract away the usage of libraries such as GLFW in order to make it easier to switch to another library in the future (or use custom code), while trying to avoid unnecessary complexity. Using a singleton to manage library state in the wrapper, but not sure yet if that's a good approach.
 
-## Simplified Overview
+## Brief Theory Overview
 
 ### Graphics Pipeline
 - Consists of the following stages:
-    - Application (CPU): prepares the data to be rendered. Can offload extra work to the GPU through compute shaders.
-    - Geometry processing (GPU from this point on): performs transformations, projections and other types of geometry handling.
-    - Rasterization: takes a primitive (generally a triangle) and outputs a set of pixels that roughly fill the primitive.
-    - Pixel processing: determines pixel color. Might also do depth testing
+    - Application (CPU): feeds geometry to next step, and takes care of everything else that wouldn't fit the rest of the pipeline. Can offload extra work to the GPU through compute shaders.
+    - Geometry processing (GPU from this point on): performs transformations, projections and other types of geometry handling. Steps:
+        - Vertex shading: takes vertex data and outputs transformed vertices (object space -> projection -> clip space). The resulting unit cube is called canonical view volume. Can also perform additional vertex calculations for lighting, animations, etc. Additional optional stages, in order: 
+            - Tessellation: hull shader, tesselation, domain shader. Generates curved surfaces with an appropriate number of triangles (objects closer to the camera have more triangles, etc)
+            - Geometry shading: takes a primitive and outputs a potentially different number of primitives. Used for things like particle generation.
+            - Stream output: allows the GPU to be used as a geometry engine for further processing. Typically used for particle simulations.
+        - Clipping: clips primitives that are partially inside the view volume to ensure that only visible vertices get rendered.
+        - Screen mapping: takes the coordinates for the clipped primitives (still in 3D) and maps them to 2D screen coordinates. Screen coordinates together with z-coordinates are also called window coordinates. 
+    - Rasterization (also known as scan conversion): converts 2D vertices (generally of triangles) in screen space into pixels on the screen. Substages:triangle setup (also called primitive assembly) and triangle traversal
+    - Pixel processing: determines pixel color. Might also do depth testing. Stages:
+        - Pixel shading: performs all per-pixel shading computations and outputs colors. Runs the pixel/fragment shader. Performs texturing.
+        - Merging/ROP: combines fragment color produced by pixel shading with color stored in color buffer. Resolves visibility via z-buffer. Performs raster/blend operations
+            - Stencil buffer: offscreen buffer that stores the locations of the rendered primitive.
+            - Framebuffer: generally consists of all buffers on the system.
+            - Double buffering: is used to avoid displaying primitives as they are being rasterized and sent to the screen. That is, the rendering of a scene takes place in a back buffer. Once complete, the back buffer is swapped with the front buffer during vertical retrace as it is safe to do so there.
