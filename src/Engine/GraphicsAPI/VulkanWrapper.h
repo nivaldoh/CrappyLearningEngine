@@ -71,6 +71,7 @@ public:
     // Initialization and Termination
     virtual bool Initialize() override;
     virtual void Terminate() override;
+    int DeviceWaitIdle();
 
     // Rendering Loop
     virtual void BeginFrame() override;
@@ -124,6 +125,9 @@ private:
     std::vector<VkFramebuffer> swapChainFramebuffers;
     VkCommandPool commandPool;
     VkCommandBuffer commandBuffer;
+    VkSemaphore imageAvailableSemaphore;
+    VkSemaphore renderFinishedSemaphore;
+    VkFence inFlightFence;
 
     VkDebugUtilsMessengerEXT debugMessenger;
 
@@ -148,6 +152,7 @@ private:
     void CreateFramebuffers();
     void CreateCommandPool();
     void CreateCommandBuffer();
+    void CreateSyncObjects();
     void RecordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 
     void SetupDebugMessenger();

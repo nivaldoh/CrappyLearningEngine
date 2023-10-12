@@ -44,4 +44,6 @@ void Engine::Tick() {
 		GLFWInst.PollEvents();
         VulkanInst.DrawFrame();
 	}
+
+    VulkanInst.DeviceWaitIdle();
 }
