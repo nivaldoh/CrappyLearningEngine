@@ -33,6 +33,7 @@ I'll keep things simple at first using libraries when applicable, but I intend t
         - [X] Create Command Buffer
     - [X] Basic Render Loop
     - [X] Draw a Triangle
+    - [X] Draw Frames in Flight
 
 ### Phase 3: Debugging and Profiling
     - [] Basic Unit Testing
