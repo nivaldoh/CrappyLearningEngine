@@ -26,7 +26,6 @@ void Engine::Init() {
 
 }
 
-// TODO: render simple triangle
 void Engine::Tick() {
 	std::cout << "Running loop" << std::endl;
 
@@ -36,7 +35,7 @@ void Engine::Tick() {
     GLFWInst.SetWindowTitle("VulkanTest");
 
     VulkanWrapper& VulkanInst = VulkanWrapper::GetInstance();
-    VulkanInst.SetGLFWInstance(&GLFWInst);
+    VulkanInst.SetPlatformLayerInstance(&GLFWInst);
     VulkanInst.Initialize();
 
     std::cout << "Polling" << std::endl;

@@ -65,8 +65,7 @@ static std::vector<char> readFile(const std::string& filename) {
 class VulkanWrapper : public IGraphicsAPI {
 public:
     static VulkanWrapper& GetInstance();
-    // TODO: do this in a better way
-    void SetGLFWInstance(GLFWWrapper* instance);
+    void SetPlatformLayerInstance(IPlatformLayer* instance);
 
     VulkanWrapper();
     ~VulkanWrapper();
@@ -108,8 +107,7 @@ private:
     VulkanWrapper(VulkanWrapper const&) = delete;
     void operator=(VulkanWrapper const&) = delete;
 
-    // TODO: decouple this
-    GLFWWrapper* glfwInstance;
+    IPlatformLayer* platformLayer;
 
     VkInstance vkInstance;
     VkDevice device;
@@ -135,6 +133,7 @@ private:
 
     VkDebugUtilsMessengerEXT debugMessenger;
 
+    void RecreateSwapChain();
     bool CreateInstance();
     bool CheckValidationLayerSupport();
     std::vector<const char*> GetRequiredExtensions();

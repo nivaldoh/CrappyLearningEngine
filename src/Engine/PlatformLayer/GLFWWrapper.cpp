@@ -57,6 +57,14 @@ void GLFWWrapper::GetFramebufferSize(int* width, int* height) {
 	glfwGetFramebufferSize(window, width, height);
 }
 
+void GLFWWrapper::WaitEvents() {
+    glfwWaitEvents();
+}
+
+const GLFWwindow* GLFWWrapper::GetWindow() {
+	return window;
+}
+    
 void GLFWWrapper::SetWindowTitle(const std::string& title) {
     if (window) {
         glfwSetWindowTitle(window, title.c_str());

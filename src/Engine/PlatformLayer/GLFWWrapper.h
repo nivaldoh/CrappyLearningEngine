@@ -13,11 +13,14 @@ public:
 
     // Vulkan
     // TODO: create macro and maybe set this in the interface
-    VkResult CreateWindowSurface(
+    // TODO: circular dependency
+    virtual VkResult CreateWindowSurface(
         VkInstance 	instance,
         const VkAllocationCallbacks* allocator,
-        VkSurfaceKHR* surface);
-    void GetFramebufferSize(int* width, int* height);
+        VkSurfaceKHR* surface) override;
+    virtual void GetFramebufferSize(int* width, int* height) override;
+    virtual void WaitEvents() override;
+    const GLFWwindow* GetWindow();
 
     virtual void SetWindowTitle(const std::string& title) override;
     virtual void SetWindowState(WindowState state) override;

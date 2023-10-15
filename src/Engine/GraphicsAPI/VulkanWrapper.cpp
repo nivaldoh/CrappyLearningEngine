@@ -8,11 +8,11 @@ VulkanWrapper& VulkanWrapper::GetInstance() {
     return instance;
 }
 
-void VulkanWrapper::SetGLFWInstance(GLFWWrapper* instance) {
+void VulkanWrapper::SetPlatformLayerInstance(IPlatformLayer* instance) {
     if (instance == nullptr) {
-		throw std::runtime_error("GLFW instance is null");
+		throw std::runtime_error("Platform layer instance is null");
 	}
-    glfwInstance = instance;
+	platformLayer = instance;
 }
 
 VulkanWrapper::VulkanWrapper() {
@@ -144,6 +144,29 @@ VKAPI_ATTR VkBool32 VKAPI_CALL VulkanWrapper::debugCallback(
     return VK_FALSE;
 }
 
+void VulkanWrapper::RecreateSwapChain() {
+    int width = 0, height = 0;
+    while (width == 0 || height == 0) {
+		platformLayer->GetFramebufferSize(&width, &height);
+		platformLayer->WaitEvents();
+	}
+    
+    //int width = 0, height = 0;
+    //glfwGetFramebufferSize(window, &width, &height);
+    //while (width == 0 || height == 0) {
+    //    glfwGetFramebufferSize(window, &width, &height);
+    //    glfwWaitEvents();
+    //}
+
+    //vkDeviceWaitIdle(device);
+
+    //CleanupSwapChain();
+
+    //CreateSwapChain();
+    //CreateImageViews();
+    //CreateFramebuffers();
+}
+
 bool VulkanWrapper::CreateInstance() {
     if (enableValidationLayers && !CheckValidationLayerSupport()) {
         throw std::runtime_error("validation layers requested, but not available!");
@@ -232,7 +255,7 @@ std::vector<const char*> VulkanWrapper::GetRequiredExtensions() {
 }
 
 void VulkanWrapper::CreateSurface() {
-    if (glfwInstance->CreateWindowSurface(vkInstance, nullptr, &surface) != VK_SUCCESS) {
+    if (platformLayer->CreateWindowSurface(vkInstance, nullptr, &surface) != VK_SUCCESS) {
 		throw std::runtime_error("Failed to create window surface");
 	}
 }
@@ -341,7 +364,7 @@ VkExtent2D VulkanWrapper::ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capab
     }
     else {
         int width, height;
-        glfwInstance->GetFramebufferSize(&width, &height);
+        platformLayer->GetFramebufferSize(&width, &height);
 
         VkExtent2D actualExtent = {
             static_cast<uint32_t>(width),
