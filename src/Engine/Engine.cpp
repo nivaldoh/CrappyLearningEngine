@@ -32,6 +32,7 @@ void Engine::Tick() {
     // TODO: move this to PreInit
     GLFWWrapper& GLFWInst = GLFWWrapper::GetInstance();
     GLFWInst.Initialize();
+    GLFWInst.SetFramebufferSizeCallback(GLFWInst.GetWindow(), framebufferResizeCallback);
     GLFWInst.SetWindowTitle("VulkanTest");
 
     VulkanWrapper& VulkanInst = VulkanWrapper::GetInstance();

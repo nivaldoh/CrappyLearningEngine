@@ -29,6 +29,8 @@ bool GLFWWrapper::Initialize() {
         return false;
     }
 
+    glfwSetWindowUserPointer(window, this);
+
     return true;
 }
 
@@ -61,7 +63,7 @@ void GLFWWrapper::WaitEvents() {
     glfwWaitEvents();
 }
 
-const GLFWwindow* GLFWWrapper::GetWindow() {
+/*const*/ GLFWwindow* GLFWWrapper::GetWindow() {
 	return window;
 }
     
@@ -101,3 +103,7 @@ bool GLFWWrapper::ShouldCloseWindow() {
 //std::unique_ptr<IPlatformLayer> CreatePlatformLayer() {
 //    return std::make_unique<GLFWPlatformLayer>();
 //}
+
+void GLFWWrapper::SetFramebufferSizeCallback(GLFWwindow* window, GLFWframebuffersizefun callback) {
+    glfwSetFramebufferSizeCallback(window, callback);
+}

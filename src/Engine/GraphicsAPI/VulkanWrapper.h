@@ -8,6 +8,9 @@
 #include <algorithm>
 #include <filesystem>
 
+// TODO: do this properly
+#include <GLFW/glfw3.h>
+
 // TODO: move this
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -49,7 +52,7 @@ static std::vector<char> readFile(const std::string& filename) {
     std::ifstream file(filename, std::ios::ate | std::ios::binary);
 
     if (!file.is_open()) {
-        throw std::runtime_error("failed to open file!");
+        throw std::runtime_error("Failed to open file");
     }
 
     size_t fileSize = (size_t)file.tellg();
@@ -134,6 +137,7 @@ private:
     VkDebugUtilsMessengerEXT debugMessenger;
 
     void RecreateSwapChain();
+    void CleanupSwapChain();
     bool CreateInstance();
     bool CheckValidationLayerSupport();
     std::vector<const char*> GetRequiredExtensions();

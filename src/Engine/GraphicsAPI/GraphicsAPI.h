@@ -11,6 +11,9 @@ class Buffer;
 
 class IGraphicsAPI {
 public:
+    // TODO: not here
+    bool framebufferResized;
+
     virtual ~IGraphicsAPI() = default;
 
     // Initialization and Termination

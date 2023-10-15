@@ -34,6 +34,7 @@ I'll keep things simple at first using libraries when applicable, but I intend t
     - [X] Basic Render Loop
     - [X] Draw a Triangle
     - [X] Draw Frames in Flight
+    - [X] Enable Swap Chain Recreation (e.g. for window resizing)
 
 ### Phase 3: Debugging and Profiling
     - [] Basic Unit Testing
